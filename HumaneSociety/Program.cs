@@ -10,6 +10,9 @@ namespace HumaneSociety
     {
         static void Main(string[] args)
         {
+            SQLCommand command = new SQLCommand();
+            HSMain main = new HSMain();
+            main.RunProgram();
         }
     }
 }
