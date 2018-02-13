@@ -8,5 +8,9 @@ namespace HumaneSociety
 {
     class Cat : Animal
     {
+        public Cat()
+        {
+            Create();
+        }
     }
 }

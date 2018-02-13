@@ -6,12 +6,11 @@ using System.Threading.Tasks;
 
 namespace HumaneSociety
 {
-    class Program
+    class Lizard : Animal
     {
-        static void Main(string[] args)
+        public Lizard()
         {
-            HSMain main = new HSMain();
-            main.RunProgram();
+            Create();
         }
     }
 }

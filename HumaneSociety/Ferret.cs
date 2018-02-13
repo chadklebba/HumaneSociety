@@ -8,5 +8,9 @@ namespace HumaneSociety
 {
     class Ferret : Animal
     {
+        public Ferret()
+        {
+            Create();
+        }
     }
 }

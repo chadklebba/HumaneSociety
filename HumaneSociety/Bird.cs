@@ -8,5 +8,9 @@ namespace HumaneSociety
 {
     class Bird : Animal
     {
+        public Bird()
+        {
+            Create();
+        }
     }
 }

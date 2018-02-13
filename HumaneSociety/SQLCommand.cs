@@ -17,8 +17,8 @@ namespace HumaneSociety
             //dopter.Last_Name = "Rogers";
             //context.Adopters.InsertOnSubmit(dopter);
             //context.SubmitChanges();
-            Adopter nathan = (from data in context.Adopters where data.First_Name == "Nathan" select data).First();
-            Console.WriteLine(nathan.Last_Name);
+            List<Adopter> nathan = (from data in context.Adopters where data.First_Name == "Nathan" select data).ToList();
+            
         }
     }
 }

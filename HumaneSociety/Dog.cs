@@ -8,5 +8,10 @@ namespace HumaneSociety
 {
     class Dog : Animal
     {
+        public Dog()
+        {
+            Create();
+        }
+       
     }
 }
