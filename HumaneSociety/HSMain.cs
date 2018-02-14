@@ -37,7 +37,7 @@ namespace HumaneSociety
             Console.WriteLine("6. Mark an animal as adopted");
             Console.WriteLine("7. List of available animals");
             Console.WriteLine("8. List of food per week per animal");
-            Console.WriteLine("9. List if adopted animals");
+            Console.WriteLine("9. List of adopted animals");
             int answer = Int32.Parse(Console.ReadLine());
             switch (answer)
             {
@@ -116,31 +116,37 @@ namespace HumaneSociety
                 case 1:
                     {
                         Dog dog = new Dog();
+                        command.AddAnimaltoDB(dog);
                         break;
                     }
                 case 2:
                     {
                         Cat cat = new Cat();
+                        command.AddAnimaltoDB(cat);
                         break;
                     }
                 case 3:
                     {
                         Bird bird = new Bird();
+                        command.AddAnimaltoDB(bird);
                         break;
                     }
                 case 4:
                     {
                         Rabbit rabbit = new Rabbit();
+                        command.AddAnimaltoDB(rabbit);
                         break;
                     }
                 case 5:
                     {
                         Ferret ferret = new Ferret();
+                        command.AddAnimaltoDB(ferret);
                         break;
                     }
                 case 6:
                     {
                         Lizard lizard = new Lizard();
+                        command.AddAnimaltoDB(lizard);
                         break;
                     }
                 default:
