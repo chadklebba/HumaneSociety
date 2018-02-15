@@ -45,5 +45,11 @@ namespace HumaneSociety
             var tempList = adopterList.Where(m => m.lastName == getLastName);
             return tempList;
         }
+
+        public IEnumerable<Animal> AnimalList()
+        {
+            List<Animal> roomList = (from data in context.Animals select data).ToList();
+            return roomList;
+        }
     }
 }

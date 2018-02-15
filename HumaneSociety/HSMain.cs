@@ -33,8 +33,8 @@ namespace HumaneSociety
             Console.WriteLine("2. Lookup an animal");
             Console.WriteLine("3. Add an adopter");
             Console.WriteLine("4. Look up an adopter");
-            Console.WriteLine("5. Look up room assignment");
-            Console.WriteLine("6. Mark an animal as adopted");
+            Console.WriteLine("5. Look up room assignments");
+            Console.WriteLine("6. Adopt an Animal");
             Console.WriteLine("7. List of available animals");
             Console.WriteLine("8. List of food per week per animal");
             Console.WriteLine("9. List of adopted animals");
@@ -176,11 +176,14 @@ namespace HumaneSociety
         }
         public void LookupRoom()
         {
-
+            var roomList = command.AnimalList();
+            DisplayRoomList(roomList);
         }
         public void MarkAsAdopted()
         {
-
+            var searchedAnimals = command.SearchAnimalsinDB();
+            DisplaySearchedAnimals(searchedAnimals);
+            AdoptAnAnimal(searchedAnimals);
         }
         public void ListAdoptedAnimals()
         {
@@ -218,6 +221,35 @@ namespace HumaneSociety
                 Console.WriteLine("Kids: " + adopter.kids);
 
             }
+        }
+
+        public void DisplayRoomList(IEnumerable<Animal> List)
+        {
+            Console.Clear();
+            foreach (var animal in List)
+            {
+                Console.Write(("Rm# " + animal.roomNumber).PadRight(8));
+                Console.WriteLine(animal.name);
+            }
+            Console.WriteLine("Please press enter to continue");
+            Console.ReadLine();
+        }
+
+        public void AdoptAnAnimal(IEnumerable<Animal> List)
+        {
+            Console.WriteLine("\n" + "Which animal would you like to adopt? (Please type their name)");
+            string animalname = Console.ReadLine();
+            foreach (var animal in List)
+            {
+                if (animalname == animal.name)
+                {
+                    Console.WriteLine("The cost for " + animal.name + " is $" + animal.cost);
+                    Console.WriteLine(");
+
+                }
+            }
+            
+            
         }
     }
 }
