@@ -8,6 +8,18 @@ namespace HumaneSociety
 {
     public partial class Animal
     {
+        public Animal(Animal animal)
+        {
+            this.type = animal.type;
+            this.roomNumber = animal.roomNumber;
+            this.adoptedStatus = animal.adoptedStatus;
+            this.cost = animal.cost;
+            this.hasShots = animal.hasShots;
+            this.foodNeeded = animal.foodNeeded;
+            this.id = animal.id;
+            this.name = animal.name;
+                      
+        }
         
 
         public void Create()

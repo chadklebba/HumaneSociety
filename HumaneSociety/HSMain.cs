@@ -161,15 +161,18 @@ namespace HumaneSociety
         }
         public void LookupAnimal()
         {
-
+            var searchedAnimals =command.SearchAnimalsinDB();
+            DisplaySearchedAnimals(searchedAnimals);
         }
         public void AddAdopter()
         {
-
+            Adopter adopter = new Adopter();
+            command.AddAdoptertoDB(adopter);
         }
         public void LookupAdopter()
         {
-
+            var searchedAdopters = command.LookupAdopter();
+            DisplaySearchedAdopters(searchedAdopters);
         }
         public void LookupRoom()
         {
@@ -190,6 +193,31 @@ namespace HumaneSociety
         public void ListFood()
         {
 
+        }
+        public void DisplaySearchedAnimals(IEnumerable<Animal> List)
+        {
+            Console.Clear();
+            foreach (var animal in List)
+            {
+                Console.WriteLine(animal.name + "  " + animal.type + "   $" + animal.cost + "   Room #" + animal.roomNumber);
+            }
+            Console.ReadLine();
+        }
+        public void DisplaySearchedAdopters(IEnumerable<Adopter> List)
+        {
+            Console.Clear();
+            foreach (var adopter in List)
+            {
+                Console.WriteLine(adopter.firstName + " " + adopter.lastName);
+                Console.WriteLine("Adopter ID: " + adopter.adpoterID);
+                Console.WriteLine("Address: " + adopter.address);
+                Console.WriteLine("Phone Number: " + adopter.phone);
+                Console.WriteLine("Email: " + adopter.email);
+                Console.WriteLine("Housing Info: " + adopter.housing);
+                Console.WriteLine("Other Pets: " + adopter.otherPets);
+                Console.WriteLine("Kids: " + adopter.kids);
+
+            }
         }
     }
 }
