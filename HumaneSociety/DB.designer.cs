@@ -389,7 +389,7 @@ namespace HumaneSociety
 		
 		public Adopter()
 		{
-            Create();
+            
 			OnCreated();
 		}
 		

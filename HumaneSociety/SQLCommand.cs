@@ -51,5 +51,25 @@ namespace HumaneSociety
             List<Animal> roomList = (from data in context.Animals select data).ToList();
             return roomList;
         }
+
+        public void MarkAsAdopted(int id)
+        {
+            Animal animal = new Animal();
+            animal = (from data in context.Animals where data.id == id select data).FirstOrDefault();
+            animal.adoptedStatus = true;
+            context.SubmitChanges();
+        }
+
+        public IEnumerable<Animal> ListAvailableAnimals()
+        {
+            List<Animal> availableList = (from data in context.Animals where data.adoptedStatus == false select data).ToList();
+            return availableList;
+        }
+
+        public IEnumerable<Animal> ListAdoptedAnimals()
+        {
+            List<Animal> adoptedList = (from data in context.Animals where data.adoptedStatus == true select data).ToList();
+            return adoptedList;
+        }
     }
 }

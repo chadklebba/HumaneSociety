@@ -19,10 +19,15 @@ namespace HumaneSociety
         }
         public void RunProgram()
         {
-            MainMenu();
+            while (true)
+            {
+                MainMenu();
+            }
+            
         }
         public void MainMenu()
         {
+            Console.Clear();
             string ls = "Humane Society";
             Console.ForegroundColor = ConsoleColor.Gray;
             Console.WriteLine(String.Format("{0," + ((Console.WindowWidth / 2) + (ls.Length / 2)) + "}", ls) + "\n");
@@ -38,6 +43,7 @@ namespace HumaneSociety
             Console.WriteLine("7. List of available animals");
             Console.WriteLine("8. List of food per week per animal");
             Console.WriteLine("9. List of adopted animals");
+            Console.WriteLine("0. To Exit");
             int answer = Int32.Parse(Console.ReadLine());
             switch (answer)
             {
@@ -84,6 +90,11 @@ namespace HumaneSociety
                 case 9:
                     {
                         ListAdoptedAnimals();
+                        break;
+                    }
+                case 0:
+                    {
+                        Environment.Exit(0);
                         break;
                     }
                 default:
@@ -167,6 +178,7 @@ namespace HumaneSociety
         public void AddAdopter()
         {
             Adopter adopter = new Adopter();
+            adopter.Create();
             command.AddAdoptertoDB(adopter);
         }
         public void LookupAdopter()
@@ -183,19 +195,24 @@ namespace HumaneSociety
         {
             var searchedAnimals = command.SearchAnimalsinDB();
             DisplaySearchedAnimals(searchedAnimals);
-            AdoptAnAnimal(searchedAnimals);
+            int adoptedAnimalID = AdoptAnAnimal(searchedAnimals);
+            command.MarkAsAdopted(adoptedAnimalID);
         }
         public void ListAdoptedAnimals()
         {
+            var adoptedAnimals = command.ListAdoptedAnimals();
+            DisplaySearchedAnimals(adoptedAnimals);
 
         }
         public void ListAvailableAnimals()
         {
-
+            var availableAnimals = command.ListAvailableAnimals();
+            DisplaySearchedAnimals(availableAnimals);
         }
         public void ListFood()
         {
-
+            var availableAnimals = command.ListAvailableAnimals();
+            DisplayFoodForAnimals(availableAnimals);
         }
         public void DisplaySearchedAnimals(IEnumerable<Animal> List)
         {
@@ -206,6 +223,16 @@ namespace HumaneSociety
             }
             Console.ReadLine();
         }
+        public void DisplayFoodForAnimals(IEnumerable<Animal> List)
+        {
+            Console.Clear();
+            foreach (var animal in List)
+            {
+                Console.WriteLine(animal.name + "  " + animal.type + "  " + animal.foodNeeded + "  RM# " + animal.roomNumber);
+            }
+            Console.ReadLine();
+        }
+
         public void DisplaySearchedAdopters(IEnumerable<Adopter> List)
         {
             Console.Clear();
@@ -219,6 +246,8 @@ namespace HumaneSociety
                 Console.WriteLine("Housing Info: " + adopter.housing);
                 Console.WriteLine("Other Pets: " + adopter.otherPets);
                 Console.WriteLine("Kids: " + adopter.kids);
+                Console.WriteLine("\n" + "Please press enter to continue");
+                Console.ReadLine();
 
             }
         }
@@ -228,28 +257,39 @@ namespace HumaneSociety
             Console.Clear();
             foreach (var animal in List)
             {
-                Console.Write(("Rm# " + animal.roomNumber).PadRight(8));
-                Console.WriteLine(animal.name);
+                if (animal.roomNumber != null)
+                {
+                    Console.Write(("Rm# " + animal.roomNumber).PadRight(8));
+                    Console.WriteLine(animal.name);
+                }
+                
             }
             Console.WriteLine("Please press enter to continue");
             Console.ReadLine();
         }
 
-        public void AdoptAnAnimal(IEnumerable<Animal> List)
+        public int AdoptAnAnimal(IEnumerable<Animal> List)
         {
             Console.WriteLine("\n" + "Which animal would you like to adopt? (Please type their name)");
             string animalname = Console.ReadLine();
-            foreach (var animal in List)
+            var tempList = List.Where(m => m.name == animalname);
+            foreach (var animal in tempList)
             {
-                if (animalname == animal.name)
-                {
-                    Console.WriteLine("The cost for " + animal.name + " is $" + animal.cost);
-                    Console.WriteLine(");
-
-                }
+                Console.WriteLine("The cost for " + animal.name  + " is $" + animal.cost);
+                Console.WriteLine("Once the customer has paid for " + animal.name + " , please hit enter");
+                Console.ReadLine();
+                animal.adoptedStatus = true;
+                animal.roomNumber = null;
+                return animal.id;
             }
+            return 0;
+
+         }
+                
+     }
             
-            
-        }
-    }
-}
+
+
+ }
+    
+
