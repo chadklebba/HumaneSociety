@@ -60,6 +60,14 @@ namespace HumaneSociety
             context.SubmitChanges();
         }
 
+        public void GiveShots(int id)
+        {
+            Animal animal = new Animal();
+            animal = (from data in context.Animals where data.id == id select data).FirstOrDefault();
+            animal.hasShots = true;
+            context.SubmitChanges();
+        }
+
         public IEnumerable<Animal> ListAvailableAnimals()
         {
             List<Animal> availableList = (from data in context.Animals where data.adoptedStatus == false select data).ToList();
@@ -70,6 +78,12 @@ namespace HumaneSociety
         {
             List<Animal> adoptedList = (from data in context.Animals where data.adoptedStatus == true select data).ToList();
             return adoptedList;
+        }
+
+        public IEnumerable<Animal> ListShotsNeeded()
+        {
+            List<Animal> shotsNeededList = (from data in context.Animals where data.hasShots == false select data).ToList();
+            return shotsNeededList;
         }
     }
 }

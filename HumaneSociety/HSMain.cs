@@ -43,6 +43,7 @@ namespace HumaneSociety
             Console.WriteLine("7. List of available animals");
             Console.WriteLine("8. List of food per week per animal");
             Console.WriteLine("9. List of adopted animals");
+            Console.WriteLine("10. Give an animal their shots");
             Console.WriteLine("0. To Exit");
             int answer = Int32.Parse(Console.ReadLine());
             switch (answer)
@@ -90,6 +91,11 @@ namespace HumaneSociety
                 case 9:
                     {
                         ListAdoptedAnimals();
+                        break;
+                    }
+                case 10:
+                    {
+                        GiveAnimalShots();
                         break;
                     }
                 case 0:
@@ -223,6 +229,15 @@ namespace HumaneSociety
             }
             Console.ReadLine();
         }
+
+        public void DisplayAnimalsWithNoShots(IEnumerable<Animal> List)
+        {
+            Console.Clear();
+            foreach (var animal in List)
+            {
+                Console.WriteLine("ID# " + animal.id + "  " + animal.name + "  " + animal.type + "  Room #" + animal.roomNumber);
+            }
+        }
         public void DisplayFoodForAnimals(IEnumerable<Animal> List)
         {
             Console.Clear();
@@ -285,7 +300,18 @@ namespace HumaneSociety
             return 0;
 
          }
-                
+
+        public void 
+            GiveAnimalShots()
+        {
+            var searchedAnimals = command.ListShotsNeeded();
+            DisplayAnimalsWithNoShots(searchedAnimals);
+            Console.WriteLine("Please type in the ID# of the animal you want to give shots to");
+            int id = Int32.Parse(Console.ReadLine());
+            command.GiveShots(id);
+        }
+
+
      }
             
 
